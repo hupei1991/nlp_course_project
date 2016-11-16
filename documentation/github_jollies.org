@@ -6,6 +6,7 @@
 
 * Our Shared Repository = munlp_f16
 
+
 * Getting Started with Our Shared Repository
 
 ** GitHub Tutorials, Cheat Sheets, and Manuals
@@ -133,7 +134,7 @@ The master branch of the remote repo origin.
 #+begin_src initializing local repo and adding the remote
 $ cd your/repo/directory
 $ git init
-$ git remote add munlp_f16 git@github.com:tonikazic/munlp_f16.git
+$ git remote add munlp_f16  https://github.com/tonikazic/munlp_f16.git
 #+end_src
 
 
@@ -141,8 +142,9 @@ $ git remote add munlp_f16 git@github.com:tonikazic/munlp_f16.git
 
 #+begin_src listing the remote repo for your local repo
 $ git remote -v
-munlp_f16	git@github.com:tonikazic/munlp_f16.git (fetch)
-munlp_f16	git@github.com:tonikazic/munlp_f16.git (push)
+munlp_f16	https://github.com/tonikazic/munlp_f16.git (fetch)
+munlp_f16	https://github.com/tonikazic/munlp_f16.git (push)
+
 #+end_src
 
 
@@ -174,7 +176,7 @@ README.md
 
 #+BEGIN_EXAMPLE gui steps for cloning our repo
 
-1.  At https://github.com/tonikazic/munlp_f16, look for the green bar on
+1.  At [[https://github.com/tonikazic/munlp_f16]], look for the green bar on
     the right hand side of the page that says "clone or download".
 
 2.  Click the button, make sure "Clone with HTTPS" is highlighted, and
