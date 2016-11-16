@@ -1,0 +1,16 @@
+#+title: Who We Are
+
+
+
+
+| person             | email prefix | github handle | level     | background   |
+|--------------------+--------------+---------------+-----------+--------------|
+| Toni Kazic         | kazict       | tonikazic     | professor |              |
+| Meshal Alfarhood   | may82        | meshalf       | grad      | cs           |
+| James Bain         | jcbcnc       | jcbain        | grad      | anthropology |
+| Christopher Carter | cjc455       | cjc455        | ugrad     | cs           |
+| Kayla Gregory      | kgk65        | kgk65         | ugrad     | philosophy   |
+| Pei Hu             | phnmd        | hupei1991     | grad      | cs           |
+| Derek Kedigh       | drkgf8       | drkgf8        | ugrad     | cs           |
+| Joshua O'Steen     | jrocnc       | oriyentel     | ugrad     | cs           |
+

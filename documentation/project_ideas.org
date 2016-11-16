@@ -1,0 +1,94 @@
+* proposed ideas
+
+| person           | idea in hw4                                                       | thoughts                                                                              | resources in hw5                                           | thoughts                                                                                                               | # | votes |
+|------------------+-------------------------------------------------------------------+---------------------------------------------------------------------------------------+------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------+---+-------|
+| Meshal Alfarhood | summarize restaurant reviews                                      | no corpus                                                                             |                                                            | can build corpus with yelp api, need to write summarization rules                                                      | 1 |     0 |
+|                  | spam detection                                                    | corpus available, might need formatting                                               |                                                            | there is a enron corpus, but is it spam? have 3 spam corpora; need to write rules; define spam, is it person-specific? | 2 |     3 |
+| James Bain       | style comparison tool                                             | could exploit multiple corpora; register analysis, stylistics, and corpus linguistics | gutenberg or inaugural                                     | missing style rules and notion of cost fcn                                                                             | 3 |     0 |
+| Pei Hu           | style improvement tool                                            | ML; what is the cost fcn?                                                             | gutenberg                                                  | "; use machine learning to figure these out???                                                                         | 4 |     0 |
+| Derek Kedigh     | generate study questions from class notes                         | need corpus!  Or, use a literary work?                                                | CESS treebank; NER; semantic role labelling with PropBank, | need to write transformation rules;                                                                                    | 5 |     3 |
+|                  |                                                                   |                                                                                       | annotates propositions and their arguments                 |                                                                                                                        |   |       |
+| Chris Carter     | trot of Bible in English and Greek or Hebrew                      | how to map between words?  corpus?                                                    | will github bible-corpus give word mappings?               | alignment at sentence or word level?                                                                                   | 6 |     1 |
+|                  | search Bible for specific events using clauses and thematic roles | corpus?  how to build patterns?  or build pattern builder?                            |                                                            | need to write patterns                                                                                                 | 7 |     1 |
+| Kayla Gregory    | syntactic checking of words in sentence                           | need corpus and rules                                                                 |                                                            | need extensive english grammar                                                                                         | 8 |     0 |
+|                  |                                                                   |                                                                                       |                                                            |                                                                                                                        |   |       |
+
+
+* two possible projects and their scouting teams
+
+| chair  | idea                  | rest of team     |
+|--------+-----------------------+------------------|
+| Meshal | spam detection        | James, Chris     |
+| Derek  | study questn generatn | Kayla, Pei, Josh |
+
+
+
+* some current? spam techniques <2016-11-10 Thu>
+
+[[https://en.wikipedia.org/wiki/Anti-spam_techniques][wikipedia on spam trapping]]
+[[http://oemhub.bitdefender.com/spammers-getting-more-clever-analysis-spam-attacks][recent attack analysis]]
+[[http://www.dmnews.com/email-marketing/an-analysis-of-the-first-spam-email/article/516036/][analysis first spam]]
+[[http://www.gfi.com/whitepapers/why-bayesian-filtering.pdf][bayesian analysis word frequency]]
+
+
+
+* sorting through ideas and deciding on the class project <2016-11-15 Tue>
+
+The conclusion is we will do spam analysis!
+
+[[file:recordings/nov15.ogg][later part of the recording is this discussion]]
+
+** spam analysis
+
+[[./images/IMG_6179.JPG]]
+[[./images/IMG_6181.JPG]]
+[[./images/IMG_6182.JPG]]
+[[./images/IMG_6183.JPG]]
+[[./images/IMG_6184.JPG]]
+[[./images/IMG_6185.JPG]]
+
+
+
+** generating study questions from text
+
+[[./images/IMG_6186.JPG]]
+
+
+
+
+
+* tasks for spam project, finish by <2016-11-22 Tue>, and discuss on Github as needed
+
+
+[[./images/IMG_6188.JPG]]
+
+
+For each of the following tasks, do:
+
+   + identify the nltk method(s) and functions you will use.  Test these on
+     the sample email, after you understand exactly what you will get and
+     need to produce.  Post the results of your code to GitHub.
+
+   + write out the specifications for the input and output formats for your
+     step and post to GitHub!  Make sure they're exactly what NLTK says.
+
+   + look at the specs for the steps before and after yours.  Discuss,
+     using the GitHub discussion forum, if there are any differences
+     between your specs and those of the others.  Resolve these.
+
+
+** DONE make private repo 					       :toni:
+
+The name of the repo is munlp_f16 and [[git@github.com:tonikazic/munlp_f16.git][here is its address]].
+
+** TODO post a sample email from the pre-processed corpus :meshal:
+
+** TODO post 10,000 randomly selected emails from both the spam and ham parts of the PRE-PROCESSED ENRON corpus :meshal:
+
+** TODO destringify the content of each email and write to each to a separate file in a form suitable for the next step :chris:
+
+** TODO segment each destringified email into sentences and save these in an appropriate format :james:
+
+** TODO lower case each destringified email and save appropriately :derek:
+
+** TODO remove stop words and stem each email, and save output appropriately :pei:

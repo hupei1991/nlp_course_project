@@ -1,0 +1,45 @@
+#+title:  Our Joint Project, Fall 2016
+
+
+* You can find each other at [[file:../class_notes/who.org][this listing of people and handles]]
+
+* tasks for spam project, finish by <2016-11-22 Tue>, and discuss on GitHub as needed
+
+
+[[./images/IMG_6188.JPG]]
+
+
+For each of the following tasks, do:
+
+   + identify the nltk method(s) and functions you will use.  Test these on
+     the sample email, after you understand exactly what you will get and
+     need to produce.  Post the results of your code to GitHub.
+
+   + write out the specifications for the input and output formats for your
+     step and post to GitHub!  Make sure they're exactly what NLTK says.
+
+   + look at the specs for the steps before and after yours.  Discuss,
+     using the GitHub discussion forum, if there are any differences
+     between your specs and those of the others.  Resolve these.
+
+
+** DONE make private repo 					       :toni:
+
+The name of the repo is munlp_f16 and [[git@github.com:tonikazic/munlp_f16.git][here is its address]].
+
+** TODO post a sample email from the pre-processed corpus :meshal:
+
+** TODO post 10,000 randomly selected emails from both the spam and ham parts of the PRE-PROCESSED ENRON corpus :meshal:
+
+** TODO destringify the content of each email and write to each to a separate file in a form suitable for the next step :chris:
+
+** TODO segment each destringified email into sentences and save these in an appropriate format :james:
+
+** TODO lower case each destringified email and save appropriately :derek:
+
+** TODO remove stop words and stem each email, and save output appropriately :pei:
+
+
+
+
+

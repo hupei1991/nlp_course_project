@@ -1,0 +1,86 @@
+#+title:  Our Joint Project, Fall 2016
+
+
+* You can find each other at [[file:./who.org][this listing of people and handles]].
+
+* The file [[file:collective_report.org][collective_report.org]] is our formal record of our work, which we'll edit together.  This is part of the credit mechanism!
+
+* Tasks for spam project, post to GitHub and discuss there as needed using the 
+
+** specs, corpus, and preliminary code 
+#+DEADLINE: <2016-11-29 Tue>
+
+Discuss on GitHub as needed using the issue tracker (the "issues" tab on
+the repo's home page).
+
+
+
+[[./images/IMG_6188.JPG]]
+
+
+Each person is to do his or her assigned TODO in an org file, just as we
+have been doing for the homework.  So code goes in a python code block, comments
+and specifications in an example block.  Name the file
+your_lowercased_first_name.org.   Please note exceptions below.
+
+
+   + identify the nltk method(s) and functions you will use.  Write the
+     code out as far as you can and then test it on the sample email, after
+     you understand exactly what you will get and need to produce (see
+     below).  Modify your code accordingly. Post the code and its results
+     of your code to GitHub.  REMEMBER, you're prototyping code, not doing
+     everything at once.  Be sure to write your code as functions, so we
+     can easily build the processing and analysis pipelines.
+
+   + write out the specifications for the input and output formats for your
+     step and post to GitHub!  Make sure they're exactly what NLTK says.
+
+   + look at the specs for the steps before and after yours.  Discuss,
+     using the GitHub issue tracker, if there are any differences
+     between your specs and those of the others.  Resolve these.
+
+
+
+
+*** DONE make private repo, munlp_f16 				       :toni:
+
+The name of the repo is munlp_f16 and [[git@github.com:tonikazic/munlp_f16.git][here is its address]].
+
+
+*** TODO post a sample email from the pre-processed corpus as a separate file entitled sample_email :meshal:
+
+
+
+*** TODO post 10,000 randomly selected emails from each of the spam and ham parts of the PRE-PROCESSED ENRON corpus :meshal:
+
+Under the repo subdirectory corpus, make a subdirectory for each portion and
+put the emails as plain text files in their subdirectories.  Make sure you
+preserve metadata and existing naming scheme.
+
+
+*** TODO destringify the content of each email and write to each to a separate file in a form suitable for the next step :chris:
+
+Preserve directory structure and file names, and place the results in the
+repo directory destringified.
+    
+*** TODO segment each destringified email into sentences and save these in an appropriate format :james:
+
+Preserve directory structure and file names, and place the results in the
+repo directory segmented.
+
+
+*** TODO lower case each destringified email and save appropriately :derek:
+
+Preserve directory structure and file names, and place the results in the
+repo directory lower_case.
+
+
+*** TODO remove stop words and stem each email, and save output appropriately :pei:
+
+Preserve directory structure and file names, and place the results in the
+repo directory stemmed.
+
+
+
+
+
