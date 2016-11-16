@@ -1,0 +1,15 @@
+#+title: Our Collective Project Report
+
+* Goal
+
+* Corpora
+
+* Approach
+
+* Implementation
+
+* Results
+
+* Analysis
+
+

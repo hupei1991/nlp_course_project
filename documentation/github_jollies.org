@@ -1,0 +1,524 @@
+#+title: GitHub Jollies
+#+author: Toni Kazic
+#+date: <2016-11-16 Wed>
+
+
+
+* Our Shared Repository = munlp_f16
+
+* Getting Started with Our Shared Repository
+
+** GitHub Tutorials, Cheat Sheets, and Manuals
+
++ GitHub's tutorials have improved: [[https://guides.github.com/activities/hello-world/][their hello world]] tutorial is quick.
+  You don't need to create a repository, but the basics of other steps
+  using the GUI are covered.  [[https://guides.github.com/][GitHub has other quick start guides]].
+
+
++ I also like [[https://www.atlassian.com/git/tutorials/using-branches/git-checkout][the various Atlassian tutorials]]:  this link is on branches. 
+
+
+
++ [[https://services.github.com/kit/downloads/github-git-cheat-sheet.pdf][GitHub has cheat sheets]] in several languages:  this link is to the
+  English version.
+
+
++ [[http://git-scm.com/book/en/][my favorite reference manual for git so far!]]  These directions have drawn
+  from that manual, and have been tested on our repository.
+
+
+
+** On Your Local Machine
+
++ [[http://git-scm.com/book/en/Getting-Started-Installing-Git][install git on your local machine]] if you don't already have it.
+
++ initialize git on your local machine and at least set your user name and email:
+
+#+begin_src initializing the local repo
+$ cd directory/for/your/copy/of/our/git/repository
+$ git init
+$ git config --global user.name "Your Name"
+$ git config --global user.email youremail@wherever
+#+end_src
+
+
++ check your git configuration
+
+There are many options for [[http://git-scm.com/book/en/Getting-Started-First-Time-Git-Setup][configuring git]], and you can twiddle these as
+you wish.  For example, in my research group, our .gitignore file is long
+and global for all users.  You can check your configuration with git config
+--list, and the output might look like this:
+
+#+begin_src checking git configuration
+$ git config --list
+core.trustctime=false
+credential.helper=osxkeychain
+user.name=Toni Kazic
+user.email=kazict@missouri.edu
+core.editor=emacs
+core.excludesfile=/usr/local/git/.gitignore
+difftool.sourcetree.cmd=opendiff "$LOCAL" "$REMOTE"
+difftool.sourcetree.path=
+mergetool.sourcetree.cmd=/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh "$LOCAL" "$REMOTE" -ancestor "$BASE" -merge "$MERGED"
+mergetool.sourcetree.trustexitcode=true
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+core.ignorecase=true
+core.precomposeunicode=true
+remote.munlp_f16.url=git@github.com:tonikazic/munlp_f16.git
+remote.munlp_f16.fetch=+refs/heads/*:refs/remotes/munlp_f16/*
+
+#+end_src
+
+
++ graphical view of the repo
+
+A nifty local tool for your computer is [[https://www.kernel.org/pub/software/scm/git/docs/gitk.html][gitk]], which is a graphical viewer of the local repo's
+history.  Fonts, etc. can be set under its preferences.  Once installed,
+you can just call it from the command line:
+
+#+BEGIN_SRC starting gitk
+$ gitk
+#+END_SRC
+
+
+** On GitHub
+
+
++ [[https://github.com/login][Log onto github]] with your handle.
+
++ Accept the invitation to join munlp_f16 (if you didn't get an email
+  notifying you you'd been invited; someone tell me what happened,
+  please). 
+
++ You should see the munlp_f16 repository if you've been added to the
+  collaborators list and accepted that invitation.
+
+
+
+* Basic Githubese
+
+** repo is github slang for repository
+
+** origin
+
+An alias for the remote repo on github.
+
+** master
+
+The master branch of the local repo.
+
+** origin/master
+
+The local branch representing the state of the remote master branch of
+(remote) origin.
+
+This is updated with git fetch or git pull.
+
+
+** origin master
+
+The master branch of the remote repo origin.
+
+
+
+
+
+* Starting Your Local Repo of Our Class Repo
+
++ Initialize your local repo and add the class repo as the remote repo:
+
+#+begin_src initializing local repo and adding the remote
+$ cd your/repo/directory
+$ git init
+$ git remote add munlp_f16 git@github.com:tonikazic/munlp_f16.git
+#+end_src
+
+
++ Test to make sure it succeeded:
+
+#+begin_src listing the remote repo for your local repo
+$ git remote -v
+munlp_f16	git@github.com:tonikazic/munlp_f16.git (fetch)
+munlp_f16	git@github.com:tonikazic/munlp_f16.git (push)
+#+end_src
+
+
+
+* Getting the Remote Repo on Your Local Repo for the First Time
+
+There are two ways to grab everything, command line and GUI.
+
++ command line:
+
+#+BEGIN_SRC command-line cloning our repo for the first time
+$ git clone https://github.com/tonikazic/munlp_f16.git
+
+# now see what you got:
+
+$ ls
+munlp_f16
+$ cd munlp_f16/
+$ ls
+README.md
+
+#+END_SRC
+
+
+
+
++ You can also download a zip file and unpack it in your local directory
+  using the GitHub GUI: 
+
+#+BEGIN_EXAMPLE gui steps for cloning our repo
+
+1.  At https://github.com/tonikazic/munlp_f16, look for the green bar on
+    the right hand side of the page that says "clone or download".
+
+2.  Click the button, make sure "Clone with HTTPS" is highlighted, and
+    click "Download ZIP".  Save the file in a convenient place.
+
+3.  Initialize your local repo and add our joint repo as a remote (see
+    above).
+
+4.  Move the zip file into the local repo and unzip it.  You'll get a
+    directory munlp_f16-master/.  Once you cd to that, you can add and
+    commit files as below.
+
+#+END_EXAMPLE
+
+
+* Adding Files to Your Local Repository
+
++ Stage the files by adding and then committing them to your local repo.
+  Make sure your commit message is descriptive and includes your org tag
+  (:name:).  I usually add the whole directory, but you can [[http://git-scm.com/book/en/Git-Basics-Getting-a-Git-Repository][add
+  subdirectories or individual files]], too.  Wildcards are ok.
+
+#+begin_src adding and committing 
+$ git status
+nothing added to commit but untracked files present (use "git add" to track)
+
+$ git add *
+$ git commit -m 'basic files and directory structure for fall, 2016'
+[master (root-commit) c7bad11] basic files and directory structure for fall, 2016
+ 13 files changed, 256 insertions(+)
+ create mode 100644 documentation/collective_report.org
+ create mode 100644 documentation/images/IMG_6179.JPG
+ create mode 100644 documentation/images/IMG_6181.JPG
+ create mode 100644 documentation/images/IMG_6182.JPG
+ create mode 100644 documentation/images/IMG_6183.JPG
+ create mode 100644 documentation/images/IMG_6184.JPG
+ create mode 100644 documentation/images/IMG_6185.JPG
+ create mode 100644 documentation/images/IMG_6186.JPG
+ create mode 100644 documentation/images/IMG_6188.JPG
+ create mode 100644 documentation/project.org
+ create mode 100644 documentation/project_ideas.org
+ create mode 100644 documentation/project_report.org
+ create mode 100644 documentation/who.org
+
+#+end_src
+
+
+(There are some [[http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository][nuances about tracking or not tracking files]], which I have
+ignored for the moment.)
+
+
+* Branches Help Keep Us Organized, So We'll Use Them
+
+** Rationale
+
+GitHub's workflow relies on creating branches for preliminary work and
+discussion, and then merging finished code onto the master branch.  We're
+going to use that process for the project.
+
+
+The basic principle of branching is that you must first move git's internal
+pointer to the branch you want, then operate on that branch.  This applies
+to both the master and its branches, on your local copy and on our shared
+GitHub repository.  
+
+
+The name of the local branch is BRANCH (fill in what you like, see
+below) . . . but the name of the shared branch is REPO/BRANCH.  The
+branch names must match.  The branch names should be simple and descriptive.
+
+
+** Creating and Switching to Branches
+
+To create a branch, you "branch".  To switch to a branch, you must
+"checkout" it. 
+
+
+#+begin_src creating and switching to branches in the local repo
+$ pwd
+/Users/toni/me/chores/teaching/current/nlp/repo
+
+$ ls
+corpus		documentation	segmented
+destringified	lower_case	stemmed   
+
+$ git branch preliminary_code
+
+$ git checkout preliminary_code
+D	documentation/collective_report.org
+M	documentation/project.org
+D	documentation/project_ideas.org
+D	documentation/project_report.org
+Switched to branch 'preliminary_code'
+
+$ git checkout master
+D	documentation/collective_report.org
+M	documentation/project.org
+D	documentation/project_ideas.org
+D	documentation/project_report.org
+Switched to branch 'master'
+#+end_src
+
+In the listing, "D" means a file was deleted and "M" that it was modified.
+You can see I've made changes I haven't yet committed.
+
+
+
+Of course, you can create a branch and switch to it at the same time using
+the -b switch:
+
+#+BEGIN_SRC creating and switching to branches at once
+$ git checkout -b BRANCH
+#+END_SRC
+
+
+** Adding and Committing Files to a Branch
+
+
+Since we want certain things to go in certain places for the code, make it
+a habit to first cd to the intended directory for your file, and then
+switch the pointer to that branch EACH TIME BEFORE YOU COMMIT.
+
+
+
+#+BEGIN_SRC adding files to branches
+# where are we?
+
+$ pwd
+/Users/toni/me/chores/teaching/current/nlp/repo
+$ ls
+code		data		documentation
+
+
+
+
+# creating a dummy test file, foo
+
+% cd code
+$ echo "foo" > foo
+$ ls
+foo
+
+
+
+# switching branches
+
+$ git checkout preliminary_code
+
+
+
+
+# adding and committing file foo
+
+$ git add foo
+$ git commit -m 'added foo to our preliminary_code as a test :toni:'
+[preliminary_code 85a4bc0] added foo to our preliminary_code as a test :toni:
+ 1 file changed, 1 insertion(+)
+ create mode 100644 code/foo
+
+
+
+
+# switching back to master
+
+$ git checkout master
+D	documentation/collective_report.org
+M	documentation/project.org
+D	documentation/project_ideas.org
+D	documentation/project_report.org
+Switched to branch 'master'
+
+
+#+END_SRC
+
+
+** Pushing Branches to the Shared Repo
+
+Now you're ready to push your local changes onto the shared repository so
+others can see them.
+
+#+BEGIN_SRC 
+$ git push munlp_f16 preliminary_code
+#+END_SRC
+
+
+
+
+** Merging Branches Into the Master Branch
+
+
++ Once you're satisified everything in the branch is correct and (pretty
+  much) final, you should merge that branch back into the local master.  First
+  check out your intended destination for the merger (here, master), and
+  then merge your branch:
+
+
+#+BEGIN_SRC 
+$ git checkout BRANCH
+$ git merge BRANCH
+#+END_SRC
+
+
+
++ Then it's time to merge the local master back to the GitHub repository:
+
+#+BEGIN_SRC 
+$ git merge munlp3/f15-s16
+#+END_SRC
+
+
+If conflicts arise when merging branches, check with the rest of us, and
+read the book or talk with more experienced git folks.
+
+
+
+There is another technique for joining branches called [[http://git-scm.com/book/en/Git-Branching-Rebasing][rebasing]], about
+which I remember little from last year, but it's in the [[https://www.atlassian.com/git/tutorials/syncing/git-pull][Atlassian tutorial
+on git pull]]. 
+
+
+
+
+
+* Moving Files between Your Local and the Shared Repositories
+
+These instructions assume we're operating on a branch, here
+preliminary_code. A convenient tutorial is [[https://www.atlassian.com/git/tutorials/syncing/git-remote][by Atlassian]].
+
+
+
+
+** Push your files to our shared repository
+
+
+#+BEGIN_SRC push the local copy of the branch
+$ git push munlp_f16 preliminary_code:preliminary_code
+#+END_SRC
+
+
+If the push fails, that means someone else has pushed a modified version of
+the file.  You must first fetch it to your machine, merge it with your
+version, and then push the doubly revised version back to git.
+
+
+** Getting files from the shared repository
+
+There are two ways to get files from GitHub to your local machine.  
+
++ The first gets all files and merges them in separately:
+
+#+begin_src fetching and merging files
+$ git checkout preliminary_code
+$ git fetch munlp_f16 preliminary_code
+$ git merge munlp_f16 preliminary_code
+#+END_SRC
+
+
++ The second gets the files AND merges remote branches with your
+local copy of those same branches:
+
+#+begin_src pulling files
+$ git checkout preliminary_code
+$ git pull munlp_f16 preliminary_code
+#+end_src
+
+
+"pull" will fail noisily if it detects conflicts . . . and it's up to you to
+resolve the conflicts listed by editing the file.
+
+
+
+
+
+* Adding Collaborators (crib sheet for Toni)
+
+[[https://help.github.com/articles/adding-collaborators-to-a-personal-repository][instructions]]
+
++ After getting to the page of the repository, look at the right-hand menu.
+
++ Click "Settings"
+
++ Click the "Collaborators" tab on the LEFT-HAND menu bar.
+
++ Now enter the github user name of the collaborator.
+ 
+
+
+
+
+
+* Rearranging Branches (crib sheet for Toni)
+
+#+BEGIN_SRC 
+
+# check we're where we should be before doing anything
+
+$ git branch
+$ git checkout f14-s15
+$ git branch
+
+
+# do a dry run first
+
+$ git rm -rfn f15-s16
+$ git rm -rf f15-s16
+$ git commit -m 'cleaned up f14-s15 branch to remove the f15-s16 subdirectory'
+$ git push
+$ git push munlp3 f14-s15:f14-s15
+
+
+# checkout master, repeat
+
+$ git branch master
+$ git checkout master
+$ git branch
+
+# oops, got errors about missing files
+$ git rm -rf --cached --ignore-unmatch code email_archive images new_work old_stuff papers .gitignore README.md emacs.org prepositns.org project.org resources.org
+$ git commit -m 'think i have cleaned up master'
+
+
+# push failed because it wanted the code subdirectory
+
+$ git push munlp3 master:master
+$ git branch
+$ git pull munlp3 master
+
+
+# first commit code back, then remove it
+
+$ git commit -m 'had to add code subdir before removal'
+$ git rm -rf code
+$ git commit -m 'now removed code'
+$ git push munlp3 master:master
+
+
+# now buff up this year's branch
+
+$ git checkout f15-s16
+$ cp -p days.org github_jollies.org project.org ../repo/f15-s16/.
+$ git branch
+$ git rm -rf  examples.org problems_of_nlp.org 
+$ git add .
+$ git commit -m 'updated days, project, pythonesque, and github org files'
+$ git push munlp3 f15-s16:f15-s16
+
+#+END_SRC

@@ -1,0 +1,12 @@
+#+title: Getting Started on the Project
+#+author: Toni Kazic
+
+To get going, you need to:
+   + [[file:mechanics/github_jollies.org][install github and clone our shared repository]]; and
+   + read the [[file:project.org][project.org]] file in the documentation directory of the repo,
+     and do your task as specified 
+
+
+A copy of this file, github_jollies.org, and project.org are in both
+class_notes and the shared repository in the documentation subdirectory.
+
