@@ -1,0 +1,62 @@
+#+title: Sentence Segmentation
+
+#+begin_src python
+
+def sentenceSegmenter(email):
+    from nltk import sent_tokenize
+    import re
+    
+    space_removed = re.sub(r'\s+\.+', '.', email) # remove the spaces before the period
+    money_spaces_removed = re.sub(r'(\$)(\s+)(\d+\.)(\s+)(\d+)', r'\1\3\5', space_removed) # remove the spaces involved with money
+    
+    sents = sent_tokenize(money_spaces_removed)
+    
+    return sents
+
+#+end_src
+
+
+#+BEGIN_EXAMPLE
+sentenceSegmenter() takes in a single string of data that is an email. It used the re library
+in order to clean up the string a bit so that it can interpret the end of a sentence properly.
+The space_removed object is just a way to remove the extra spaces between the last word of a phrase
+and a period. For example, "He went to school ." would become "He went to school.". There was also 
+some strange spacing for money that needed to be cleaned up so that the decimal wasn't interpreted
+as the end of a sentence. Once the string is cleaned up for these two issues, it is run through the
+sent_tokenize method, which splits the the sting by sentences. This is the object that is returned.  
+#+END_EXAMPLE
+
+
+* TEST
+
+Below is a test of the sentenceSegmenter method defined above on the ham
+email provided.
+
+#+begin_src python :session :results output
+
+# read in ham file for test 
+with open("/data/corpus/sample_email_ham.txt") as f:
+    raw = f.read()
+
+# remove newline character
+n = raw.split('\n')
+
+# join the lists back together into a single string
+s = ' '.join(n)
+
+# segment the sentences
+sentenceSegmenter(s)
+
+#+end_src
+
+#+BEGIN_EXAMPLE
+#['Subject: january spot tickets daren , hplc is purchasing gas from the following list of producers.',
+# 'this production is currently being purchased on a spot basis and deal tickets should be entered into sitara for the follow : counterparty meter mmbtu / d price engage energy us , lp 5839 600 100 % less $0.18 engage energy us , lp 5848 500 100 % less $0.18 engage energy us , lp 5923 700 100 % less $0.18 engage energy us , lp 6801 1 , 100 100 % less $0.18 gasper rice resources , ltd. 9810 1 100 % less $0.11 prize resources 4028 1 , 300 100 % less $0.20 prize resources 4965 200 100 % less $0.35 prize resources 5121 800 100 % less $0.11 prize resources 6523 40 100 % less $0.35 swift energy 2630 20 90 % less $0.258 whiting petroleum 6523 500 ?',
+# '?',
+# '?',
+# 'additionally , i asked carlos to search sitara for what would be essentially be a spot ticket for the incremental volumes delivered to meter 9610 ( cage ranch ) for the production month of november.',
+# "i ' ve received executed paper from coastal documenting a purchase price of 100 % of gas daily less a gpm sliding scale.",
+# 'please confirm whether or not a sitara ticket has been generated.',
+# 'if not , please use this e - mail as a request to do so.',
+# 'thanks , vlt x 3 - 6353 ']
+#+END_EXAMPLE
