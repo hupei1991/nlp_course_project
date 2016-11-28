@@ -108,6 +108,11 @@ Goes in [[file:data/destringified]].  Preserve organization of previous step.
 Goes in [[file:data/segmented]].  Preserve organization of previous step.
 
 
+
+**** TODO tokenize each sentence from each destringified email and save these in an appropriate format :kayla:
+
+Goes in [[file:data/tokenized]].  Preserve organization of previous step.
+
 **** TODO lower case each destringified email and save appropriately :derek:
 
 Goes in [[file:data/lower_case]].  Preserve organization of previous step.
