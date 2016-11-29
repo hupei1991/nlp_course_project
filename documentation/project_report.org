@@ -1,15 +1,22 @@
 #+title: Our Collective Project Report
 
-* Goal
+Write a succinct paragraph for your section!  Your audience is an external
+visitor who wants to know what we did for our project.
 
-* Corpora
+Sketch a draft for your paragraph, and push it up to github so
+that :toni: can make suggestions.
 
-* Approach
 
-* Implementation
+* Goal :meshal:
 
-* Results
+* Corpora :kayla:
 
-* Analysis
+* Approach :chris:
+
+* Implementation :derek:
+
+* Results :pei:
+
+* Analysis and Future Work 					      :james:
 
 
