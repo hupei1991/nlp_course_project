@@ -1,0 +1,79 @@
+#+title: Creating and Reading the Corpus
+
+The dataset used for this project is taken from Enron1 and Enron2 (http://www.aueb.gr/users/ion/data/enron-spam/)
+
+* Select 10,000 emails randomly
+
+I merge Enron1 and Enron2 and choose 10,000 emails from them using the following code:
+
+#+begin_src python
+import os
+import random
+from shutil import copyfile
+
+hamFiles = []
+for i in range(7500):
+    f = random.choice(os.listdir("corpus/ham/"))
+    hamFiles.append(f)
+    copyfile("corpus/ham/"+f, "Newcorpus/ham/"+f)
+    
+spamFiles = []
+for i in range(2500):
+    f = random.choice(os.listdir("corpus/spam/"))
+    spamFiles.append(f)
+    copyfile("corpus/spam/"+f, "Newcorpus/spam/"+f)
+
+print (len(hamFiles), len(spamFiles))
+
+
+#RESULT:
+# 7500 2500
+
+#+end_src
+
+
+#+BEGIN_EXAMPLE
+The code above selects 10,000 emails randomly from Enron corpus, which is mentioned in the introduction. The ratio I chose for spam/ham is 1:3. Therefore, 7,500 emails are
+chosen to be ham while 2,500 emails are chosen to be spam. The next step now is how we are going to read the corpus, so we can use the NLTK methods.
+#+END_EXAMPLE
+
+
+
+* Reading the Corpus
+
+Below is the code to read the corpus we made in the previous section. The code read two seprate folders: ham and spam, then merge them in one final list (allEmails). The final list
+has this structure (email_in_text_format, Ham_or_Spam). Also, filesMetadata is a hash table that stores the filename as a key, while the value is wherther it's a spam or ham. 
+At the end, we shuffle the list. 
+
+#+begin_src python
+
+import os
+import nltk
+import random
+
+filesMetadata = {} # {fileName -> hamOrSpam}
+
+#Read the whole folder and return a list of texts
+def readFolder(folder, hamOrSpam):
+    listA = []
+    for filename in os.listdir(folder):
+        filesMetadata[filename] = hamOrSpam
+        f = open(folder+filename, 'r')
+        listA.append(f.read())
+    f.close()
+    return listA
+
+ham =  readFolder('corpus/ham/' , 'ham')
+spam = readFolder('corpus/spam/' , 'spam')
+
+allEmails = [(email, 'ham') for email in ham]
+allEmails += [(email, 'spam') for email in spam]
+
+random.shuffle(allEmails)
+print (len(allEmails))
+
+
+#RESULT:
+# 10000
+
+#+end_src
