@@ -1,0 +1,177 @@
+#+title:  Our Class Project
+
+
+* People and Record-Keeping
+
+   + You can find each other at [[file:./who.org][this listing of people and handles]].
+
+   + The file [[file:project_report.org][project_report.org]] is the formal record of our
+     work. We'll write this together, but you must ensure you sign your
+     block with your tag in order to receive credit! 
+
+   + MAKE SURE YOU POST YOUR CODE AND RESULTS TO GITHUB!  Otherwise I must
+     zero out your contributions to the class project (not a good idea for
+     you). 
+
+
+* Constraints <2016-11-29 Tue> :toni:
+
+You're only allowed to use NLTK methods that DON'T subsume your task.  For
+example, PlainTextCorpusReader subsumes :meshal:'s, :kayla:'s, :chris:'s,
+and :james:'s tasks (and maybe :derek:'s and :pei:'s, too).  So it's not
+fair to use PlainTextCorpusReader except to understand its input and
+output, and what methods corpora constructed using it are supported.
+
+
+* Tasks for spam project, post to GitHub and discuss there as needed
+
+** current overview of the project: [[./images/IMG_6198.JPG]] <2016-11-29 Tue>
+
+
+
+[[./images/IMG_6188.JPG]]: first overview <2016-11-15 Tue>
+
+[[file:recordings/nov29.ogg][audio]] (only on canvas)
+
+
+** specs, corpus, and preliminary code 
+#+DEADLINE: <2016-12-06 Tue>
+
+GitHub has a guide for the [[https://guides.github.com/introduction/flow/][github workflow]], which we'll follow.
+
+
+
+*** directories to use:  code, data, and documentation
+
+   + all code sketches go in the code subdirectory as an org file.  Put your
+     code in python code blocks and the comments and specifications in an
+     example block, just as we've been doing for the homework.  Name the
+     file your_lowercased_first_name.org.  
+
+   + all input and output go in the data subdirectory in the appropriate
+     subdirectories, as noted below in your specific task.
+
+   + your part of the collective project report goes in [[file:project_report.org][documentation/project_report.org]]
+
+
+*** branch to use: preliminary_code
+
+Once you have everything, cd to the top of your local repo, [[github_jollies.org][switch to
+branch preliminary_code]], and add and commit.
+
+
+*** view others' work and discuss it with them using GitHub's issue tracker
+
+Discuss on GitHub as needed using the issue tracker (the "issues" tab on
+the repo's home page).
+
+
+*** what to do for your task
+
+   + identify the nltk method(s) and functions you will use.  Write the
+     code out as far as you can and then test it on the sample email, after
+     you understand exactly what you will get and need to produce (see
+     below).  Modify your code accordingly. Post the code and its results
+     of your code to GitHub using the directories and branch specified
+     above.  Be sure to write your code as functions, so we can easily
+     build the processing and analysis pipelines.  REMEMBER, you're
+     prototyping code, not doing everything at once.
+
+   + write out the specifications for the input and output formats for your
+     step in your org file!  Make sure they're exactly what NLTK says.
+
+   + look at the specs for the steps before and after yours.  Discuss,
+     using the GitHub issue tracker, if there are any differences
+     between your specs and those of the others.  Resolve these.
+
+   + <2016-11-29 Tue> Now revise your code so it handles your input version of the corpus
+     and outputs the new version of the corpus.
+
+*** the tasks
+
+As you progress through your task, change its status (the colored word after
+the stars) to one of:
+   + STRTD  --- you've started the task
+   + GNG    --- you've made some progress
+   + DONE   --- the task is done!
+
+Be sure to add and commit your version of this file to the repo!
+
+**** DONE make private repo, munlp_f16 				       :toni:
+
+The name of the repo is munlp_f16 and [[git@github.com:tonikazic/munlp_f16.git][here is its address]].
+
+
+See [[file:github_jollies.org]] for how to get started with the github side of
+things.
+
+
+
+**** DONE post a sample email from the pre-processed corpus as a separate file :meshal:
+
+Goes in [[file:../data/corpus/sample_email]].
+
+
+**** GNG post 10,000 randomly selected emails from each of the spam and ham parts of the PRE-PROCESSED ENRON corpus :meshal:
+
+Goes in [[file:data/corpus]].  Organize the emails so that nltk will recognize
+them as a corpus.  Preserve metadata (e.g., is the email ham or spam?) and
+the existing naming scheme.
+
+
+Make a file nltk can read that says which email is ham and which is spam,
+per the discussion on <2016-11-29 Tue>.
+
+
+
+[[http://stackoverflow.com/questions/4951751/creating-a-new-corpus-with-nltk][plain text corpus reader]]:  an example
+
+[[http://www.nltk.org/howto/corpus.html][corpus howto]]: another example
+
+[[http://www.nltk.org/howto/corpus.html#automatically-created-corpus-reader-instances][creating a corpus from scratch]]: still another example
+
+
+
+**** TODO restringify the content of each email 		      :chris:
+
+Put the entire contents of each email in a string, preserving all newlines.
+
+Goes in [[file:data/restringified]].  Preserve organization and metadata of previous step.
+
+
+    
+
+**** GNG segment each restringified email into sentences and save these in an appropriate format :james:
+
+Goes in [[file:data/segmented]].  Preserve organization and metadata of
+previous step, appending appropriate sentence identifiers.
+
+
+
+**** GNG tokenize each sentence from each restringified email and save these in an appropriate format :kayla:
+
+Goes in [[file:data/tokenized]].  Preserve organization and metadata of
+previous step, appending appropriate word identifiers.
+
+
+**** TODO lower case each restringified email and save appropriately :derek:
+
+Goes in [[file:data/lower_case]].  Preserve organization and metadata of
+previous step:  some keys will vanish.
+
+
+
+**** TODO remove stop words and stem each email, and save output appropriately :pei:
+
+Goes in [[file:data/stemmed]].  Preserve organization and metadata of previous
+step: more keys will vanish.
+
+
+
+
+
+
+
+
+
+
