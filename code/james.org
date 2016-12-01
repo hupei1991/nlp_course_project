@@ -119,3 +119,9 @@ each tuple is a list with each item of the list being a sentence, which was
 just split by sentenceSegmenter. The second item of the tuple is the
 retained "ham" or "spam" label. 
 
+* Advise for next bit of code
+
+In order to segment by words, you will need to create a function (or use one
+from nltk) and iterate over each item in each email, which is now a list of
+sentences. Essentially, you will want a list of lists, or in other words,
+each email is a list of sentences and each sentence is a list of words.
