@@ -1,0 +1,36 @@
+#+title: lower
+	
+ 
+
+#+begin_src python
+
+def lower(email):
+    #email is a string
+    lowered = email.lower()
+    return lowered 
+
+#+end_src
+
+
+#+BEGIN_EXAMPLE 
+
+lower takes a string as an input and used the .lower() function to make everything lowercase.
+
+#+END_EXAMPLE
+
+
+* TEST
+
+Below is a test of the lower method defined above on a sample string
+
+#+begin_src python :session :results output
+
+email = "This is a Test.  Lets see if The Test Works.  Lets See if it will Lower Everything?"
+lowered = email.lower()
+print(lowered) 
+
+#+end_src
+
+#+BEGIN_EXAMPLE
+#this is a test.  lets see if the test works.  lets see if it will lower everything?
+#+END_EXAMPLE
