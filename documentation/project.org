@@ -131,6 +131,11 @@ per the discussion on <2016-11-29 Tue>.
 [[http://www.nltk.org/howto/corpus.html#automatically-created-corpus-reader-instances][creating a corpus from scratch]]: still another example
 
 
+[[http://stackoverflow.com/questions/10463898/creating-a-custom-categorized-corpus-in-nltk-and-python][creating a custom corpus]]
+
+[[http://stackoverflow.com/questions/15611328/how-to-save-a-custom-categorized-corpus-in-nltk][saving the custom corpus]]
+
+[[http://www.nltk.org/_modules/nltk/corpus/reader/plaintext.html][nltk corpus reader documentation]]
 
 **** TODO restringify the content of each email 		      :chris:
 
