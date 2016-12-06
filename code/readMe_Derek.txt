@@ -1,0 +1,1 @@
+lowerIt takes a string as input converts it to lowercase and returns it.
