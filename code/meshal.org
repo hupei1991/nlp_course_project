@@ -59,19 +59,18 @@ def readFolder(folder, hamOrSpam):
     for filename in os.listdir(folder):
         filesMetadata[filename] = hamOrSpam
         f = open(folder+filename, 'r')
-        listA.append(f.read())
+        listA.append((filename, f.read()))
     f.close()
     return listA
 
 ham =  readFolder('corpus/ham/' , 'ham')
 spam = readFolder('corpus/spam/' , 'spam')
 
-allEmails = [(email, 'ham') for email in ham]
-allEmails += [(email, 'spam') for email in spam]
+allEmails = [(fileId, email, 'ham') for fileId, email in ham]
+allEmails += [(fileId, email, 'spam') for fileId, email in spam]
 
 random.shuffle(allEmails)
 print (len(allEmails))
-
 
 #RESULT:
 # 10000
