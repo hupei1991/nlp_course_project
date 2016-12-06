@@ -1,0 +1,9 @@
+
+	
+	
+#+begin_src python :session :results output
+def lower(email):
+    #email is a string
+    lowered = email.lower()
+    return lowered  
+#+end_src  
