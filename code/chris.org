@@ -1,0 +1,19 @@
+#+begin_src python :session :results output
+def restringify(emails):
+    all_emails = ""
+    for x in emails:
+        all_emails += x
+    return all_emails
+#+end_src
+ 
+
+James' proposed method for restringifying emails. 
+
+#+begin_src python
+def restringify(email):
+    n = email.split('\n')
+    s = ' '.join(n)
+    return s
+#+end_src
+
+
