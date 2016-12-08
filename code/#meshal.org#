@@ -1,0 +1,142 @@
+#+title: Creating and Reading the Corpus
+
+The dataset used for this project is taken from Enron1 and Enron2 (http://www.aueb.gr/users/ion/data/enron-spam/)
+
+* Select 10,000 emails randomly
+
+I merge Enron1 and Enron2 and choose 10,000 emails from them using the following code:
+
+#+begin_src python
+import os
+import random
+from shutil import copyfile
+
+hamFiles = []
+for i in range(7500):
+    f = random.choice(os.listdir("corpus/ham/"))
+    hamFiles.append(f)
+    copyfile("corpus/ham/"+f, "Newcorpus/ham/"+f)
+    
+spamFiles = []
+for i in range(2500):
+    f = random.choice(os.listdir("corpus/spam/"))
+    spamFiles.append(f)
+    copyfile("corpus/spam/"+f, "Newcorpus/spam/"+f)
+
+print (len(hamFiles), len(spamFiles))
+
+
+#RESULT:
+# 7500 2500
+
+#+end_src
+
+
+#+BEGIN_EXAMPLE
+The code above selects 10,000 emails randomly from Enron corpus, which is mentioned in the introduction. The ratio I chose for spam/ham is 1:3. Therefore, 7,500 emails are
+chosen to be ham while 2,500 emails are chosen to be spam. The next step now is how we are going to read the corpus, so we can use the NLTK methods.
+#+END_EXAMPLE
+
+
+
+* Reading the Corpus
+
+Below is the code to read the corpus we made in the previous section. The code read two seprate folders: ham and spam, then merge them in one final list (allEmails). The final list
+has this structure (email_in_text_format, Ham_or_Spam). Also, filesMetadata is a hash table that stores the filename as a key, while the value is wherther it's a spam or ham. 
+At the end, we shuffle the list. 
+
+#+begin_src python
+
+import os
+import nltk
+import random
+
+filesMetadata = {} # {fileName -> hamOrSpam}
+
+#Read the whole folder and return a list of texts
+def readFolder(folder, hamOrSpam):
+    listA = []
+    for filename in os.listdir(folder):
+        filesMetadata[filename] = hamOrSpam
+        f = open(folder+filename, 'r')
+        listA.append(f.read())
+    f.close()
+    return listA
+
+ham =  readFolder('corpus/ham/' , 'ham')
+spam = readFolder('corpus/spam/' , 'spam')
+
+allEmails = [(email, 'ham') for email in ham]
+allEmails += [(email, 'spam') for email in spam]
+
+random.shuffle(allEmails)
+print (len(allEmails))
+
+
+#RESULT:
+# 10000
+
+#+end_src
+
+
+* Reading the Corpus using PlaintextCorpusReader
+
+#+begin_src python
+
+import os
+import nltk
+import random
+from nltk.corpus.reader.plaintext import PlaintextCorpusReader
+
+emailCorpus = PlaintextCorpusReader('corpus/', '.*', encoding = 'iso-8859-1')
+
+filesMetadata = {} # {fileName -> hamOrSpam}
+allEmails = []
+
+# Access each file in the corpus.
+for fileId in sorted(emailCorpus.fileids()):
+    fin = emailCorpus.open(fileId) # Open the file
+    fileName = fileId.split('/', 1)[-1] #remove the directory name
+    fileContent = fin.read().strip() # Read the file
+    hamOrSpam = None
+    if ('ham' in fileId): # if 'ham' contained in the fileName
+        hamOrSpam = 'ham'
+        allEmails.append((fileName, fileContent, hamOrSpam))
+        filesMetadata[fileName] = hamOrSpam
+    elif ('spam' in fileId):
+        hamOrSpam = 'spam'
+        allEmails.append((fileName, fileContent, hamOrSpam))
+        filesMetadata[fileName] = hamOrSpam
+       
+random.shuffle(allEmails)
+print (len(allEmails))
+
+#Test for some functions
+#print (emailCorpus.paras(emailCorpus.fileids()[0]))
+#print (emailCorpus.sents()[100])
+#print (emailCorpus.words(emailCorpus.fileids()[1]))
+
+
+
+
+#RESULT:
+# 10000
+
+#+end_src
+
+
+* Writing the files metadata into a file
+
+#+BEGIN_SRC python
+
+#Open a file 
+f = open('filesMetadata.txt','w')
+
+#Loop through the filesMetadata dictionary
+for key in filesMetadata:
+    f.write(key+ " " +filesMetadata[key] + "\n")
+
+#Close the file
+f.close()
+
+#+END_SRC
