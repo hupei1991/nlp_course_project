@@ -5,7 +5,7 @@ This bit of code includes the first part of Meshal's code in order to get
 the files read in as a corpus. I then use the corpus obeject to access the
 emails.
 
-#+begin_src python
+#+begin_src python :session
 import os
 import nltk
 import random
@@ -38,8 +38,37 @@ for fileId in sorted(emailCorpus.fileids()):
         
 random.shuffle(allEmails)
 print (len(allEmails))
+
 #+end_src
 
+#+begin_src python :session
+# write a method to split each email form the corpus by sentence
+def sentenceSegmenter(email):
+    import re
+    from nltk import sent_tokenize
+    space_removed = re.sub(r'\s+\.+', '.', email) # remove the spaces before the period
+    money_spaces_removed = re.sub(r'(\$)(\s+)(\d+\.)(\s+)(\d+)', r'\1\3\5', space_removed) # remove the spaces involved with money
+    sents = sent_tokenize(money_spaces_removed)
+    return sents
+
+# create a method to remove newline characters
+def restringify(email):
+    n = email.split('\n')
+    s = ' '.join(n)
+    return s
+
+# first restring the characters 
+restringed = nltk.Text([restringify(emailCorpus.raw(email)) for email in emailCorpus.fileids()])
+
+# then segment the sentences. This object is a nltk.Text object
+# and you iterate over each email and each email per email
+segmented_sents = nltk.Text([sentenceSegmenter(email) for email in restringed])
+
+#+end_src
+
+This section introduces the methods I use to segment each email into
+sentences. What is returned is a list of of lists. This object is
+transformed into a nltk.Text object. 
 
 #+begin_src python
 
