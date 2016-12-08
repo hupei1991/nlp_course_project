@@ -25,13 +25,16 @@ output, and what methods corpora constructed using it are supported.
 
 * Tasks for spam project, post to GitHub and discuss there as needed
 
-** current overview of the project: [[./images/IMG_6198.JPG]] <2016-11-29 Tue>
+** current overview <2016-12-06 Tue>
 
+[[file:recordings/dec6.ogg][audio]], canvas only
 
+** prior overviews of the project:
 
-[[./images/IMG_6188.JPG]]: first overview <2016-11-15 Tue>
+   +  [[./images/IMG_6198.JPG]] <2016-11-29 Tue>
 
-[[file:recordings/nov29.ogg][audio]] (only on canvas)
+   + [[./images/IMG_6188.JPG]]: first overview <2016-11-15 Tue>
+      [[file:recordings/nov29.ogg][audio]] (only on canvas)
 
 
 ** specs, corpus, and preliminary code 
@@ -131,11 +134,6 @@ per the discussion on <2016-11-29 Tue>.
 [[http://www.nltk.org/howto/corpus.html#automatically-created-corpus-reader-instances][creating a corpus from scratch]]: still another example
 
 
-[[http://stackoverflow.com/questions/10463898/creating-a-custom-categorized-corpus-in-nltk-and-python][creating a custom corpus]]
-
-[[http://stackoverflow.com/questions/15611328/how-to-save-a-custom-categorized-corpus-in-nltk][saving the custom corpus]]
-
-[[http://www.nltk.org/_modules/nltk/corpus/reader/plaintext.html][nltk corpus reader documentation]]
 
 **** TODO restringify the content of each email 		      :chris:
 
