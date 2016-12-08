@@ -59,18 +59,65 @@ def readFolder(folder, hamOrSpam):
     for filename in os.listdir(folder):
         filesMetadata[filename] = hamOrSpam
         f = open(folder+filename, 'r')
-        listA.append((filename, f.read()))
+        listA.append(f.read())
     f.close()
     return listA
 
 ham =  readFolder('corpus/ham/' , 'ham')
 spam = readFolder('corpus/spam/' , 'spam')
 
-allEmails = [(fileId, email, 'ham') for fileId, email in ham]
-allEmails += [(fileId, email, 'spam') for fileId, email in spam]
+allEmails = [(email, 'ham') for email in ham]
+allEmails += [(email, 'spam') for email in spam]
 
 random.shuffle(allEmails)
 print (len(allEmails))
+
+
+#RESULT:
+# 10000
+
+#+end_src
+
+
+* Reading the Corpus using PlaintextCorpusReader
+
+#+begin_src python
+
+import os
+import nltk
+import random
+from nltk.corpus.reader.plaintext import PlaintextCorpusReader
+
+emailCorpus = PlaintextCorpusReader('corpus/', '.*', encoding = 'iso-8859-1')
+
+filesMetadata = {} # {fileName -> hamOrSpam}
+allEmails = []
+
+# Access each file in the corpus.
+for fileId in sorted(emailCorpus.fileids()):
+    fin = emailCorpus.open(fileId) # Open the file
+    fileName = fileId.split('/', 1)[-1] #remove the directory name
+    fileContent = fin.read().strip() # Read the file
+    hamOrSpam = None
+    if ('ham' in fileId): # if 'ham' contained in the fileName
+        hamOrSpam = 'ham'
+        allEmails.append((fileName, fileContent, hamOrSpam))
+        filesMetadata[fileName] = hamOrSpam
+    elif ('spam' in fileId):
+        hamOrSpam = 'spam'
+        allEmails.append((fileName, fileContent, hamOrSpam))
+        filesMetadata[fileName] = hamOrSpam
+       
+random.shuffle(allEmails)
+print (len(allEmails))
+
+#Test for some functions
+#print (emailCorpus.paras(emailCorpus.fileids()[0]))
+#print (emailCorpus.sents()[100])
+#print (emailCorpus.words(emailCorpus.fileids()[1]))
+
+
+
 
 #RESULT:
 # 10000
