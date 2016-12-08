@@ -113,6 +113,32 @@ for fileId in email_list:
     sentenceMetadata.append(t)
 #+end_src
 
+Writing objects to disk using the pickle package 
+
+#+begin_src python :session
+import pickle
+
+# write segmented sents to disk (uncomment below to run)
+
+#pickle.dump(segmented_sents, open( "code/segmented/segmented_sents.p", "wb" ) )
+
+# write sentence metadata to disk (uncomment below to run)
+
+#pickle.dump(sentenceMetadata, open("data/segmented/sentence_metadata.p", "wb"))
+
+#+end_src
+
+
+NOW HERE IS HOW YOU READ IT BACK IN. THE NEXT PERSON WILL USE THESE
+COMMANDS TO READ IN THE DATA
+
+#+begin_src python :session
+# read in the segmented corpus
+segmented_sents = pickle.load( open( "code/segmented/segmented_sents.p", "rb" ) )
+
+# read in the sentence metadata
+sentenceMetadata = pickle.load( open( "data/segmented/sentence_metadata.p", "rb" ) )
+#+end_src
 
 * Old Code
 #+begin_src python
