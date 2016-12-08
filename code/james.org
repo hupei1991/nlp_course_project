@@ -41,6 +41,10 @@ print (len(allEmails))
 
 #+end_src
 
+This section introduces the methods I use to segment each email into
+sentences. What is returned is a list of of lists. This object is
+transformed into a nltk.Text object.
+
 #+begin_src python :session
 # write a method to split each email form the corpus by sentence
 def sentenceSegmenter(email):
@@ -61,15 +65,56 @@ def restringify(email):
 restringed = nltk.Text([restringify(emailCorpus.raw(email)) for email in emailCorpus.fileids()])
 
 # then segment the sentences. This object is a nltk.Text object
-# and you iterate over each email and each email per email
+# and you iterate over each email and each sentence per email
 segmented_sents = nltk.Text([sentenceSegmenter(email) for email in restringed])
 
 #+end_src
 
-This section introduces the methods I use to segment each email into
-sentences. What is returned is a list of of lists. This object is
-transformed into a nltk.Text object. 
+Creating the metadata table for sentences. Index names are
+"filename::sentIndexNumber"
+ 
 
+#+begin_src python :session
+# create a list of file ids for the metadata object
+# this will iterate over the emailCorpus.fileids() object
+# as well as the segmented_sentence object
+
+email_counter = 0
+email_list = []
+
+for i in emailCorpus.fileids():
+    index_counter = 0
+    index_list = []
+    for j in segmented_sents[email_counter]:
+        item = "{}::{}".format(emailCorpus.fileids()[email_counter],index_counter)
+        index_list.append(item)
+        index_counter += 1
+    email_list.extend(index_list)   
+    email_counter += 1
+
+
+# create the metadata for the sentences
+# this will be a string of tuples
+# the first item of each tuple is the file name (index)
+# second item is whether it is ham or spam
+
+sentenceMetadata = [] # [(fileName , hamOrSpam)]
+
+ 
+# Access each file in the corpus.
+for fileId in email_list:
+    fileName = fileId.split('/', 1)[-1] #remove the directory name
+    hamOrSpam = None
+    if ('ham' in fileId): # if 'ham' contained in the fileName
+        hamOrSpam = 'ham'
+    elif ('spam' in fileId):
+        hamOrSpam = 'spam'
+    t = (fileName,hamOrSpam)
+    sentenceMetadata.append(t)
+#+end_src
+
+
+* Old Code
 #+begin_src python
 
 def sentenceSegmenter(email):
