@@ -77,3 +77,66 @@ print (len(allEmails))
 # 10000
 
 #+end_src
+
+
+* Reading the Corpus using PlaintextCorpusReader
+
+#+begin_src python
+
+import os
+import nltk
+import random
+from nltk.corpus.reader.plaintext import PlaintextCorpusReader
+
+emailCorpus = PlaintextCorpusReader('corpus/', '.*', encoding = 'iso-8859-1')
+
+filesMetadata = {} # {fileName -> hamOrSpam}
+allEmails = []
+
+# Access each file in the corpus.
+for fileId in sorted(emailCorpus.fileids()):
+    fin = emailCorpus.open(fileId) # Open the file
+    fileName = fileId.split('/', 1)[-1] #remove the directory name
+    fileContent = fin.read().strip() # Read the file
+    hamOrSpam = None
+    if ('ham' in fileId): # if 'ham' contained in the fileName
+        hamOrSpam = 'ham'
+        allEmails.append((fileName, fileContent, hamOrSpam))
+        filesMetadata[fileName] = hamOrSpam
+    elif ('spam' in fileId):
+        hamOrSpam = 'spam'
+        allEmails.append((fileName, fileContent, hamOrSpam))
+        filesMetadata[fileName] = hamOrSpam
+       
+random.shuffle(allEmails)
+print (len(allEmails))
+
+#Test for some functions
+#print (emailCorpus.paras(emailCorpus.fileids()[0]))
+#print (emailCorpus.sents()[100])
+#print (emailCorpus.words(emailCorpus.fileids()[1]))
+
+
+
+
+#RESULT:
+# 10000
+
+#+end_src
+
+
+* Writing the files metadata into a file
+
+#+BEGIN_SRC python
+
+#Open a file 
+f = open('filesMetadata.txt','w')
+
+#Loop through the filesMetadata dictionary
+for key in filesMetadata:
+    f.write(key+ " " +filesMetadata[key] + "\n")
+
+#Close the file
+f.close()
+
+#+END_SRC

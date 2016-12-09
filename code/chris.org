@@ -52,3 +52,18 @@ restringify()
 */
 
 #+end_src
+<<<<<<< HEAD
+=======
+ 
+
+James' proposed method for restringifying emails. 
+
+#+begin_src python
+def restringify(email):
+    n = email.split('\n')
+    s = ' '.join(n)
+    return s
+#+end_src
+
+
+>>>>>>> origin/preliminary_code
