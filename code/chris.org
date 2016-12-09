@@ -1,3 +1,6 @@
+
+James helped me a lot with this function. I commented out some previous attempts, but this function restringify works the best with James’s code!
+
 #+begin_src python :session :results output
 import os
 import nltk
