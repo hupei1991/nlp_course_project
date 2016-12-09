@@ -1,8 +1,51 @@
 #+begin_src python :session :results output
-def restringify(emails):
-    all_emails = ""
-    for x in emails:
+import os
+import nltk
+import random
+from nltk.corpus.reader.plaintext import PlaintextCorpusReader
+import sys
+
+
+
+def restringify(email):
+    n = email.split('\n')
+    s = ' '.join(n)
+    return s
+
+
+
+/*
+def restringify_old():
+    all_file_contents = readFolder('../data/corpus/ham')
+    all_files_combined = ""
+    for x in all_file_contents:
         all_emails += x
-    return all_emails
+    
+    with open('restringified.py', 'w') as file_:
+        file_.write(all_files_combined)
+
+def restringify():
+
+    from os import walk
+
+
+    mypath = '../data/corpus/ham'
+
+    f = []
+    for (dirpath, dirnames, filenames) in walk(mypath):
+        f.extend(filenames)
+
+    final_output = ""
+
+    for filename in f:
+        with open(f, 'r') as file_:
+            file_.write(file_.read())
+            file_output += file.read()
+
+    print(final_output)
+
+
+restringify()
+*/
+
 #+end_src
- 
