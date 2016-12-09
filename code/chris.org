@@ -17,7 +17,6 @@ def restringify(email):
 
 
 
-/*
 def restringify_old():
     all_file_contents = readFolder('../data/corpus/ham')
     all_files_combined = ""
@@ -27,7 +26,7 @@ def restringify_old():
     with open('restringified.py', 'w') as file_:
         file_.write(all_files_combined)
 
-def restringify():
+def restringify_old2():
 
     from os import walk
 
@@ -49,17 +48,16 @@ def restringify():
 
 
 restringify()
-*/
+
 
 #+end_src
-<<<<<<< HEAD
-=======
+
  
 
 James' proposed method for restringifying emails. 
 
 #+begin_src python
-def restringify(email):
+def restringify_james(email):
     n = email.split('\n')
     s = ' '.join(n)
     return s
