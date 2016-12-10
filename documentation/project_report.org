@@ -14,7 +14,13 @@ Spam is annoying! The statistics shows that spam messages make up to 60% of the 
 * Corpora :kayla:
 
 * Approach :chris:
-
+Meshal made a corpus from pre-processed enails, which is divided into two
+catogories: spam and ham. Then, Chris  put the entire contents of each email in
+a string. James segmented each restringified email into sentences, and
+saved them in the appropriate formant. Kayla toeknized each sentence from
+each restringified email and saved in the appropriate format. Derek made
+all the emails lowercase. Finally, Pei removed the stop words of each
+email. We divided the work evenly between us, and Chris got some help from James.
 * Implementation :derek:
 
 * Results :pei:
