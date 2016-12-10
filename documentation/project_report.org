@@ -9,6 +9,8 @@ that :toni: can make suggestions.
 
 * Goal :meshal:
 
+Spam is annoying! The statistics shows that spam messages make up to 60% of the email traffic worldwide. Fortunately, most of the email service provider includes a spam filter to automatically detect spams and move them in a separate folder, usually called junk. Therefore, the main goal of this project is to implement a spam filter for emails using machine learning classification techniques with the help of NLTK toolkit. NLTK provides wide functionality for natural language processing. Processing the text of each email is really important in order to extract some informative features that can be used to train our classifier. For instance, word occurrence and frequency are some of the most informative features to detect spams. The classifier, Naive Bayes for example, at the end of this project should distinguish between spam and ham (non-spam) based on those features of each email. 
+
 * Corpora :kayla:
 
 * Approach :chris:
