@@ -1,0 +1,67 @@
+
+James helped me a lot with this function. I commented out some previous attempts, but this function restringify works the best with James’s code!
+
+#+begin_src python :session :results output
+import os
+import nltk
+import random
+from nltk.corpus.reader.plaintext import PlaintextCorpusReader
+import sys
+
+
+
+def restringify(email):
+    n = email.split('\n')
+    s = ' '.join(n)
+    return s
+
+
+
+def restringify_old():
+    all_file_contents = readFolder('../data/corpus/ham')
+    all_files_combined = ""
+    for x in all_file_contents:
+        all_emails += x
+    
+    with open('restringified.py', 'w') as file_:
+        file_.write(all_files_combined)
+
+def restringify_old2():
+
+    from os import walk
+
+
+    mypath = '../data/corpus/ham'
+
+    f = []
+    for (dirpath, dirnames, filenames) in walk(mypath):
+        f.extend(filenames)
+
+    final_output = ""
+
+    for filename in f:
+        with open(f, 'r') as file_:
+            file_.write(file_.read())
+            file_output += file.read()
+
+    print(final_output)
+
+
+restringify()
+
+
+#+end_src
+
+ 
+
+James' proposed method for restringifying emails. 
+
+#+begin_src python
+def restringify_james(email):
+    n = email.split('\n')
+    s = ' '.join(n)
+    return s
+#+end_src
+
+
+>>>>>>> origin/preliminary_code
