@@ -44,7 +44,7 @@ def sentenceSegmenter(email):
 # of spam and ham, thus we would only use RegexpTokenizer to tokenize the sentences. Revised by :pei:
 def wordTokenizer(sentence):
     from nltk.tokenize import RegexpTokenizer
-    toker = RegexpTokenizer(r'\w+')
+    toker = RegexpTokenizer(r'\w+|\$+')
     # a list of words is returned :pei:
     return toker.tokenize(sentence)
 
