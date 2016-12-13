@@ -14,7 +14,7 @@ def lower(email):
 
 #+BEGIN_EXAMPLE 
 
-lower takes a string as an input and used the .lower() function to make everything lowercase.
+lower takes a string as an input and used the .lower() function to make everything lowercase.  It outputs a string in all lowercase.
 
 #+END_EXAMPLE
 
