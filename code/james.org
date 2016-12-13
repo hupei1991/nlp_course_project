@@ -1,215 +1,23 @@
 #+title: Sentence Segmentation
 
-* Updated Code
-This bit of code includes the first part of Meshal's code in order to get
-the files read in as a corpus. I then use the corpus obeject to access the
-emails.
+1. Main Script
+
+We have decided to create a dictionary as our data structure to house our
+corpus. From the following script provides us with a dictionary that
+contains emails segmented by sentences. The index name, which we structure
+as "filename::sentenceInd#" (ex. '1986.2004-08-26.GP.spam.txt::0'
+references the first sentence of the 1986.2004-08-26.GP.spam.txt file) is
+the key to the dictionary and the sentence is the value. In this script,
+this dictionary object is called "fileidxsentenceidx_sentence". However,
+accessing you can access this data structures in the data/segmented
+directory under the file name sents_dict.p. Instructions for reading this
+back in to operate on are in section 3 of this file (james.org).
+
+Instructions for the next step (word segementation) can be found in section
+4 of this document.
 
 #+begin_src python :session
-import os
-import nltk
-import random
-from nltk.corpus.reader.plaintext import PlaintextCorpusReader
-import sys
-
- 
-emailCorpus = PlaintextCorpusReader('corpus/', '.*', encoding = "ISO-8859-1")
- 
-filesMetadata = {} # {fileName -> hamOrSpam}
-allEmails = []
- 
-# Access each file in the corpus.
-for fileId in sorted(emailCorpus.fileids()):
-    try:
-        fin = emailCorpus.open(fileId) # Open the file
-        fileName = fileId.split('/', 1)[-1] #remove the directory name
-        fileContent = fin.read().strip() # Read the file
-        hamOrSpam = None
-        if ('ham' in fileId): # if 'ham' contained in the fileName
-            hamOrSpam = 'ham'
-            allEmails.append((fileName, fileContent, hamOrSpam))
-            filesMetadata[fileName] = hamOrSpam
-        elif ('spam' in fileId):
-            hamOrSpam = 'spam'
-            allEmails.append((fileName, fileContent, hamOrSpam))
-            filesMetadata[fileName] = hamOrSpam
-    except:
-        continue
-        
-random.shuffle(allEmails)
-print (len(allEmails))
-
-#+end_src
-
-This section introduces the methods I use to segment each email into
-sentences. What is returned is a list of of lists. This object is
-transformed into a nltk.Text object.
-
-#+begin_src python :session
-# write a method to split each email form the corpus by sentence
-def sentenceSegmenter(email):
-    import re
-    from nltk import sent_tokenize
-    space_removed = re.sub(r'\s+\.+', '.', email) # remove the spaces before the period
-    money_spaces_removed = re.sub(r'(\$)(\s+)(\d+\.)(\s+)(\d+)', r'\1\3\5', space_removed) # remove the spaces involved with money
-    sents = sent_tokenize(money_spaces_removed)
-    return sents
-
-# create a method to remove newline characters
-def restringify(email):
-    n = email.split('\n')
-    s = ' '.join(n)
-    return s
-
-# first restring the characters 
-restringed = nltk.Text([restringify(emailCorpus.raw(email)) for email in emailCorpus.fileids()])
-
-# then segment the sentences. This object is a nltk.Text object
-# and you iterate over each email and each sentence per email
-segmented_sents = nltk.Text([sentenceSegmenter(email) for email in restringed])
-
-#+end_src
-
-Creating the metadata table for sentences. Index names are
-"filename::sentIndexNumber"
- 
-
-#+begin_src python :session
-# create a list of file ids for the metadata object
-# this will iterate over the emailCorpus.fileids() object
-# as well as the segmented_sentence object
-
-email_counter = 0
-email_list = []
-
-for i in emailCorpus.fileids():
-    index_counter = 0
-    index_list = []
-    for j in segmented_sents[email_counter]:
-        item = "{}::{}".format(emailCorpus.fileids()[email_counter],index_counter)
-        index_list.append(item)
-        index_counter += 1
-    email_list.extend(index_list)   
-    email_counter += 1
-
-
-# create the metadata for the sentences
-# this will be a string of tuples
-# the first item of each tuple is the file name (index)
-# second item is whether it is ham or spam
-
-sentenceMetadata = [] # [(fileName , hamOrSpam)]
-
- 
-# Access each file in the corpus.
-for fileId in email_list:
-    fileName = fileId.split('/', 1)[-1] #remove the directory name
-    hamOrSpam = None
-    if ('ham' in fileId): # if 'ham' contained in the fileName
-        hamOrSpam = 'ham'
-    elif ('spam' in fileId):
-        hamOrSpam = 'spam'
-    t = (fileName,hamOrSpam)
-    sentenceMetadata.append(t)
-#+end_src
-
-Writing objects to disk using the pickle package 
-
-#+begin_src python :session
-import pickle
-
-# write segmented sents to disk (uncomment below to run)
-
-#pickle.dump(segmented_sents, open( "code/segmented/segmented_sents.p", "wb" ) )
-
-# write sentence metadata to disk (uncomment below to run)
-
-#pickle.dump(sentenceMetadata, open("data/segmented/sentence_metadata.p", "wb"))
-
-#+end_src
-
-
-NOW HERE IS HOW YOU READ IT BACK IN. THE NEXT PERSON WILL USE THESE
-COMMANDS TO READ IN THE DATA
-
-#+begin_src python :session
-# read in the segmented corpus
-segmented_sents = pickle.load( open( "code/segmented/segmented_sents.p", "rb" ) )
-
-# read in the sentence metadata
-sentenceMetadata = pickle.load( open( "data/segmented/sentence_metadata.p", "rb" ) )
-#+end_src
-
-* Old Code
-#+begin_src python
-
-def sentenceSegmenter(email):
-    from nltk import sent_tokenize
-    import re
-    
-    space_removed = re.sub(r'\s+\.+', '.', email) # remove the spaces before the period
-    money_spaces_removed = re.sub(r'(\$)(\s+)(\d+\.)(\s+)(\d+)', r'\1\3\5', space_removed) # remove the spaces involved with money
-    
-    sents = sent_tokenize(money_spaces_removed)
-    
-    return sents
-
-#+end_src
-
-
-#+BEGIN_EXAMPLE
-sentenceSegmenter() takes in a single string of data that is an email. It used the re library
-in order to clean up the string a bit so that it can interpret the end of a sentence properly.
-The space_removed object is just a way to remove the extra spaces between the last word of a phrase
-and a period. For example, "He went to school ." would become "He went to school.". There was also 
-some strange spacing for money that needed to be cleaned up so that the decimal wasn't interpreted
-as the end of a sentence. Once the string is cleaned up for these two issues, it is run through the
-sent_tokenize method, which splits the the sting by sentences. This is the object that is returned.  
-#+END_EXAMPLE
-
-
-* TEST
-
-Below is a test of the sentenceSegmenter method defined above on the ham
-email provided.
-
-#+begin_src python :session :results output
-
-# read in ham file for test 
-with open("/data/corpus/sample_email_ham.txt") as f:
-    raw = f.read()
-
-# remove newline character
-n = raw.split('\n')
-
-# join the lists back together into a single string
-s = ' '.join(n)
-
-# segment the sentences
-sentenceSegmenter(s)
-
-#+end_src
-
-#+BEGIN_EXAMPLE
-#['Subject: january spot tickets daren , hplc is purchasing gas from the following list of producers.',
-# 'this production is currently being purchased on a spot basis and deal tickets should be entered into sitara for the follow : counterparty meter mmbtu / d price engage energy us , lp 5839 600 100 % less $0.18 engage energy us , lp 5848 500 100 % less $0.18 engage energy us , lp 5923 700 100 % less $0.18 engage energy us , lp 6801 1 , 100 100 % less $0.18 gasper rice resources , ltd. 9810 1 100 % less $0.11 prize resources 4028 1 , 300 100 % less $0.20 prize resources 4965 200 100 % less $0.35 prize resources 5121 800 100 % less $0.11 prize resources 6523 40 100 % less $0.35 swift energy 2630 20 90 % less $0.258 whiting petroleum 6523 500 ?',
-# '?',
-# '?',
-# 'additionally , i asked carlos to search sitara for what would be essentially be a spot ticket for the incremental volumes delivered to meter 9610 ( cage ranch ) for the production month of november.',
-# "i ' ve received executed paper from coastal documenting a purchase price of 100 % of gas daily less a gpm sliding scale.",
-# 'please confirm whether or not a sitara ticket has been generated.',
-# 'if not , please use this e - mail as a request to do so.',
-# 'thanks , vlt x 3 - 6353 ']
-#+END_EXAMPLE
-
-* Extended Program
-
-The following code is an extension of Meshal's code, which read in the
-files and randomly selected 10,000 emails to work with. It uses the
-allEmails object, which is a list of 10,000 tuples. The first item of each
-tuple is the email and the second is its "spam" or "ham" label.
-
-#+begin_src python :session :results :output
+# Please put this file in /data/ directory :pei:
 
 import os
 import nltk
@@ -217,52 +25,114 @@ import random
 import re
 from nltk import sent_tokenize
 
-filesMetadata = {} # {fileName -> hamOrSpam}
-
-#Read the whole folder and return a list of texts :meshal:
-def readFolder(folder, hamOrSpam):
-    listA = []
+# Read the whole folder and return a list of texts :meshal:
+# Revised by :pei
+def readFolder(folder, hamOrSpam, fileidx):
     for filename in os.listdir(folder):
-        filesMetadata[filename] = hamOrSpam
-        f = open(folder+filename, 'r', errors ='ignore') # added ignore for character that couldn't be read :james:
-        listA.append(f.read())
-    f.close()
-    return listA
+        fileidx_filename[fileidx[0]] = filename
+        f = open(folder + filename, 'r', errors ='ignore') # added ignore for character that couldn't be read :james:
+        fileidx_content[fileidx[0]] = f.read()
+        fileidx_class[fileidx[0]] = hamOrSpam
+        f.close()
+        fileidx[0] += 1
 
+# create a method to remove newline characters :chris:
+def restringify(email):
+    n = email.split('\n')
+    s = ' '.join(n)
+    return s
+
+# Restringify, and segment the contents of each piece of email into sentences
 # Split the emails by sentence :james:
+
+# Also get rid spaces in front of '?' , and '!', according to the definition
+# of Punkt Sentence Segmenter;  revised by :pei:
 def sentenceSegmenter(email):
-    space_removed = re.sub(r'\s+\.+', '.', email) # remove the spaces before the period
-    money_spaces_removed = re.sub(r'(\$)(\s+)(\d+\.)(\s+)(\d+)', r'\1\3\5', space_removed) # remove the spaces involved with money
+    import re
+    from nltk import sent_tokenize
+    # remove spaces between last word and punctuation. Since punctionation is tokenized
+    # each symbol is returned :james:
+    symbols_removed = re.sub(r'\s+(?:(\.+)|(\?+)|(!+))', r'\1\2\3', email)
+    # remove the spaces before the period
+    # from here, we would only consider the '$' sign in order to reduce the feature dimension :pei:
+    money_spaces_removed = re.sub(r'(\$)(\s+)(\d+\.)(\s+)(\d+)', r'\1\3\5', symbols_removed) # remove the spaces involved with money :james:
     sents = sent_tokenize(money_spaces_removed)
     return sents
 
-ham =  readFolder('/corpus/ham/' , 'ham')
-spam = readFolder('/corpus/spam/' , 'spam')
 
-allEmails = [(email, 'ham') for email in ham]
-allEmails += [(email, 'spam') for email in spam]
+# Use a main function to organize each piece :pei:
+# I will not use any other specific data structure to store metadata except for these dictionarys :pei:
+if __name__ == "__main__":
+    global fileidx_filename, fileidx_class, fileidx_content, fileidx_sentences
+    fileidx_filename = {} # {file_name : file_index} :pei:
+    fileidx_class = {} # {file_index : file_class} :pei:
+    fileidx_content = {} # {file_index : file_content} :pei:
+    fileidxsentenceidx_sentence = {} # {file_index::sentence_index : sentence} :pei:
 
-random.shuffle(allEmails)
-print (len(allEmails))
+    fileidx = [0] # file_index :pei:
+    # Run readFolder separately on ham and spam to get dict data stored :pei:
+    readFolder('data/corpus/ham/' , 'ham', fileidx)
+    readFolder('data/corpus/spam/' , 'spam', fileidx)
+    # Since we are not going to use the fileidx viarable again, we delete it from the memory stack :pei:
+    del fileidx
+    # We don't actually need to shuffle because they are in a dictionary which is unordered :pei:
 
-segmented_sents = [(sentenceSegmenter(email), spamOrHam) for (email, spamOrHam) in allEmails]
-
+    # Generate the dictionary of fileidx_sentences, by applying restringify and sentenseSegmenter on contents :pei:
+    # with key of file_index::sentence_index, and segmented sentences as value :pei:
+    for fileidx, content in fileidx_content.items():
+        for idx, sent in enumerate(sentenceSegmenter(restringify(content))):
+            fileidxsentenceidx_sentence['{}::{}'.format(fileidx_filename[fileidx],idx)] = sent
 #+end_src
 
+2. Writing the fileidxsentenceidx_sentence dictionary to a file
+
+The following used pickle to write the fileidxsentenceidx_sentence
+dictionary to a bytes file using the pickle package. This allows you to
+read the file back in and it maintains its original structure (a dictionary).
+
+#+begin_src python :session 
+import pickle
+
+pickle.dump(fileidxsentenceidx_sentence, open( "data/segmented/sents_dict.p", "wb" ) )
+#+end_src
+
+
+3. Reading the dictionary back in
+
+Instead of running the entire script above, you can read the file directly
+into memory by using pickle again. In the example below, the dictionary
+object is read back in and called "segmented_sents". This object is
+identical to the fileidxsentenceisx_sentence dictionary that section 1 gave
+you.
+
+#+begin_src python :session
+import pickle
+
+segmented_sents = pickle.load( open( "data/segmented/sents_dict.p", "rb" ) )
+#+end_src
+
+
+4. Instructions for next step
+
+To tokenize words, you can use the same data structure as the
+"fileidxsentenceidx_sentence" dictionary with the same index as key,
+sentence as value. However, the sentence will be tokenized by word. For
+example:
+
 #+BEGIN_EXAMPLE
-#10000
+# original dictionary would output like so:
+
+{'1986.2004-08-26.GP.spam.txt::0': 'Subject: bloodline , ahead of the street microcap alert when living with sheriff is obsequious , blood clot beyond deficit reach an understanding with toward blood clot.',
+ '5394.2001-04-23.kaminski.ham.txt::98': 'the proposal has already struck panic.',...}
+
+# the new dictionary would output:
+
+{'1986.2004-08-26.GP.spam.txt::0': ['Subject:,'bloodline',',','ahead', 'of', 'the', 'street', 'microcap', 'alert', 'when', 'living', 'with', 'sheriff', 'is', 'obsequious', ',', 'blood', 'clot', 'beyond', 'deficit', 'reach','an', 'understanding', 'with', 'toward', 'blood', 'clot','.'],
+ '5394.2001-04-23.kaminski.ham.txt::98':['the', 'proposal', 'has', 'already', 'struck', 'panic','.'],...}
+
+
 #+END_EXAMPLE
 
-This code integrates the sentenceSegmenter method defined above and runs it
-over each email to split the email by sentence. This list object and is
-called segmented_sents. This object is a list of tuples. The first item of
-each tuple is a list with each item of the list being a sentence, which was
-just split by sentenceSegmenter. The second item of the tuple is the
-retained "ham" or "spam" label. 
-
-* Advise for next bit of code
-
-In order to segment by words, you will need to create a function (or use one
-from nltk) and iterate over each item in each email, which is now a list of
-sentences. Essentially, you will want a list of lists, or in other words,
-each email is a list of sentences and each sentence is a list of words.
+In other words, you will just need to iterate over the items of the read in
+sents_dict.p file and tokenize each sentence. There is no longer a nead to
+create a uniqe index for each word. 
