@@ -1,6 +1,6 @@
 #+title: Sentence Segmentation
 
-1. Main Script
+* Section 1:  Main Script
 
 We have decided to create a dictionary as our data structure to house our
 corpus. From the following script provides us with a dictionary that
@@ -84,7 +84,7 @@ if __name__ == "__main__":
             fileidxsentenceidx_sentence['{}::{}'.format(fileidx_filename[fileidx],idx)] = sent
 #+end_src
 
-2. Writing the fileidxsentenceidx_sentence dictionary to a file
+* Section 2: Writing the fileidxsentenceidx_sentence dictionary to a file
 
 The following used pickle to write the fileidxsentenceidx_sentence
 dictionary to a bytes file using the pickle package. This allows you to
@@ -97,7 +97,7 @@ pickle.dump(fileidxsentenceidx_sentence, open( "data/segmented/sents_dict.p", "w
 #+end_src
 
 
-3. Reading the dictionary back in
+* Section 3: Reading the dictionary back in
 
 Instead of running the entire script above, you can read the file directly
 into memory by using pickle again. In the example below, the dictionary
@@ -112,7 +112,7 @@ segmented_sents = pickle.load( open( "data/segmented/sents_dict.p", "rb" ) )
 #+end_src
 
 
-4. Instructions for next step
+* Section 4: Instructions for next step
 
 To tokenize words, you can use the same data structure as the
 "fileidxsentenceidx_sentence" dictionary with the same index as key,
