@@ -14,6 +14,9 @@ Spam is annoying! The statistics shows that spam messages make up to 60% of the 
 * Corpora :kayla:
 We created a corpus of the emails and their respective tags. The emails were in the corpus and they were worked on and uploaded back into the corpora. The corpus kept the emails together so the code could be ran, but also the placed ids on the different emails were kept in the corpus. A dictionary that held our corpus was used to allow us to read the file back in and keep its original structure.
 
+https://github.com/tonikazic/munlp_f16/blob/preliminary_code/code/kayla.org
+I tokenized the words of the segmented sentences using nltk's word_tokenize. I first read James' file in, ran the code, and used pickle dump to write the file back in under the tokenized and tokenize.p file.
+
 * Approach :chris:
 Meshal made a corpus from pre-processed enails, which is divided into two
 catogories: spam and ham. Then, Chris  put the entire contents of each email in
