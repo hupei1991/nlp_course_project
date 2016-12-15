@@ -7,12 +7,14 @@
 
 import pickle
 def lower(email):
-	segmented_sents = pickle.load( open( "../data/tokenized/tokenize.p", "rb"))
+	segmented_sents = pickle.load( open( "..\data\tokenized\tokenize.p", "rb"))
+	
 	finalList = []
-	finalList = [(k,v.lower()) for (k,v) in tplList]
-			
-	pickle.dump(finalList, open("../data/segmented/derek.p", "wb")) 
+	finalList = [(k,[x.lower() for x in v]) for (k,v) in segmented_sents]
+	pickle.dump(finalList, open("..\data\lower_case\lower.p", "wb")) 
 
+
+#tested in jupyter notebook
 #Derek Kedigh, <December 15, 2016>
 #+end_src
 
