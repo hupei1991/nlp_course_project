@@ -81,7 +81,7 @@ if __name__ == "__main__":
     # with key of file_index::sentence_index, and segmented sentences as value :pei:
     for fileidx, content in fileidx_content.items():
         for idx, sent in enumerate(sentenceSegmenter(restringify(content))):
-            fileidxsentenceidx_sentence['{}::{}'.format(fileidx_filename[fileidx],idx)] = sent
+            fileidxsentenceidx_sentence['{}::{:04}'.format(fileidx_filename[fileidx],idx)] = sent
 #+end_src
 
 * Section 2: Writing the fileidxsentenceidx_sentence dictionary to a file
