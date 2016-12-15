@@ -2,19 +2,24 @@
 	
  
 
-#+begin_src python
+#+begin_src python :session :output results
 
+
+import pickle
 def lower(email):
-    #email is a string
-    lowered = email.lower()
-    return lowered 
+	segmented_sents = pickle.load( open( "../data/tokenized/tokenize.p", "rb"))
+	finalList = []
+	finalList = [(k,v.lower()) for (k,v) in tplList]
+			
+	pickle.dump(finalList, open("../data/segmented/derek.p", "wb")) 
 
+#Derek Kedigh, <December 15, 2016>
 #+end_src
 
 
 #+BEGIN_EXAMPLE 
 
-lower takes a string as an input and used the .lower() function to make everything lowercase.  It outputs a string in all lowercase.
+lower takes a list of tuples as an input and used the .lower() function to make everything lowercase.  It outputs a list of tuples.
 
 #+END_EXAMPLE
 
