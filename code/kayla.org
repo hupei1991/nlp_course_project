@@ -7,19 +7,11 @@ import pickle
 
 pickle.dump(fileidxsentenceidx_sentence, open( "data/segmented/sents_dict.p", "wb" ) )
 
-def ie_preprocess(email):
-    sentences = [nltk.word_tokenize(sent) for sent in sentences]
-
-ham = readFolder('/corpus/ham/','ham')
-spam = readFolder('/corpus/spam/','spam')
-
-allEmails = [(email, 'ham') for email in ham]
-allEmails += [(email, 'spam') for email in spam]
-
-random.shuffle(allEmails)
-print (len(allEmails))
-
-word_tokenize = [(ie_prepocess(email), spamOrHam) for (email, spamOrHam) in allEmails]
+def wordTokenizer(sentence):
+    from nltk.tokenize import RegexpTokenizer
+    toker = RegexpTokenizer(r'\w+|\$+')
+ 
+    return toker.tokenize(sentence)
 
 import pickle
 
