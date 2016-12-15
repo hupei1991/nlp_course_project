@@ -111,6 +111,25 @@ import pickle
 segmented_sents = pickle.load( open( "data/segmented/sents_dict.p", "rb" ) )
 #+end_src
 
+We can read this in again and then turn the items into a list of tuples and
+then write this back to disk using pickle. This item is now a list of
+tuples. 
+
+#+begin_src python :session
+sent_list = pickle.dump(sorted(segmented_sents.items()), open("data/segmented/sent_list.p", "wb"))
+#+end_src
+
+
+Now we can read this list file back in using pickle. This is a list of
+tuples and the first item of each tuple is the index and the second item is
+the sentence.
+
+#+begin_src python
+import pickle
+
+segmented_sents = pickle.load( open( "data/segmented/sent_list.p", "rb" ) )
+#+end_src
+
 
 * Section 4: Instructions for next step
 
