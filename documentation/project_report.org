@@ -28,8 +28,18 @@ email. We divided the work evenly between us, and Chris got some help from James
 
 * Analysis and Future Work 					      :james:
 
-Future work should emphasize greater feature generation on the
-corpus. 
+Once the data were pre-processed, we combined the lists of ham and spam
+sentences into two lists of ham and spam respectively, where each
+list were the entirety of emails (either ham or spam) and each item was a
+token in the emails. We then used the FreqDist method from nltk to find the
+5000 most common tokens in both the spam and ham emails. These lists were
+then transformed into nltk.Text objects in order to find the collocations
+of each as well as the bigrams. 
+
+Future analyses should implement a machine learning approach to classifying
+emails into either a ham or spam category. This will involve feature
+generation (ie. frequency of tokens per category) as input to classifying
+emails into their respective categories.
 
 Future analyses shoud also include a corpus of more recent emails. The
 Enron dataset is from the early 2000s, a time in which emailing was more
