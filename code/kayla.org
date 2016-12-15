@@ -1,30 +1,21 @@
 #+title: Word Tokenizer
+
+#  :kayla: <2016-12-15 Thu>
  
-#+begin_src python :results :kayla 02/14/2016:
-import nltk, re, pprint
+#+begin_src python :session :output results
+import pickle
 from nltk import word_tokenize
-import pickle
 
-pickle.dump(fileidxsentenceidx_sentence, open( "data/segmented/sents_dict.p", "wb" ) )
+segmented_sents = pickle.load( open( "../data/segmented/sent_list.p", "rb" ) )
+word_tokenize = [(k,word_tokenize(v)) for (k,v) in segmented_sents]
+pickle.dump(word_tokenize, open( "../data/tokenized/tokenize.p", "wb" ) )
 
-def ie_preprocess(email):
-    sentences = [nltk.word_tokenize(sent) for sent in sentences]
-
-ham = readFolder('/corpus/ham/','ham')
-spam = readFolder('/corpus/spam/','spam')
-
-allEmails = [(email, 'ham') for email in ham]
-allEmails += [(email, 'spam') for email in spam]
-
-random.shuffle(allEmails)
-print (len(allEmails))
-
-word_tokenize = [(ie_prepocess(email), spamOrHam) for (email, spamOrHam) in allEmails]
-
-import pickle
-
-segmented_sents = pickle.load( open( "data/segmented/sents_dict.p", "rb" ) )
+#the code works at the python command line.
+#
+# kayla gregory, <2016-12-15 Thu>
 
 #+end_src
+
+#+results:
 
 
