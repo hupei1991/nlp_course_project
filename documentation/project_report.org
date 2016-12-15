@@ -28,4 +28,14 @@ email. We divided the work evenly between us, and Chris got some help from James
 
 * Analysis and Future Work 					      :james:
 
+Future work should emphasize greater feature generation on the
+corpus. 
 
+Future analyses shoud also include a corpus of more recent emails. The
+Enron dataset is from the early 2000s, a time in which emailing was more
+sparsely used by the general public. As email became more ubiquitous,
+spam blockers has become more sophisticated and spammers have developed
+more elegant methods for creating spam. This creates a virtual "Red Queen"
+scenario. In other words, spam of the early 2000s will be less relevant
+than the spam of today given that both spam blockers and spammers have
+become more sophisticated.
