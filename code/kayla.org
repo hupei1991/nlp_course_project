@@ -1,12 +1,17 @@
 #+title: Word Tokenizer
+ 
+#+begin_src python :results :kayla 02/14/2016:
+import nltk, re, pprint
+from nltk import word_tokenize
+import pickle
 
-#+begin_src python
+pickle.dump(fileidxsentenceidx_sentence, open( "data/segmented/sents_dict.p", "wb" ) )
 
 def ie_preprocess(email):
     sentences = [nltk.word_tokenize(sent) for sent in sentences]
 
-ham = readFolder('/Users/Kay/Documents/corpus/ham/','ham')
-spam = readFolder('/Users/Kay/Documents/corpus/spam/','spam')
+ham = readFolder('/corpus/ham/','ham')
+spam = readFolder('/corpus/spam/','spam')
 
 allEmails = [(email, 'ham') for email in ham]
 allEmails += [(email, 'spam') for email in spam]
@@ -16,4 +21,10 @@ print (len(allEmails))
 
 word_tokenize = [(ie_prepocess(email), spamOrHam) for (email, spamOrHam) in allEmails]
 
+import pickle
+
+segmented_sents = pickle.load( open( "data/segmented/sents_dict.p", "rb" ) )
+
 #+end_src
+
+
