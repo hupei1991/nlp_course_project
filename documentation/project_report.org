@@ -22,7 +22,12 @@ saved them in the appropriate formant. Kayla toeknized each sentence from
 each restringified email and saved in the appropriate format. Derek made
 all the emails lowercase. Finally, Pei removed the stop words of each
 email. We divided the work evenly between us, and Chris got some help from James.
+
 * Implementation :derek:
+[[file:../code/derek.org][Derek's Code]]
+I took in a list of tuples as inputs from the tokenized directory.  I iterated over the list with two for loops
+and lowered the second element in each list and placed them back in the same structure.
+I returned a list of tuples to segmented directory.
 
 * Results :pei:
 

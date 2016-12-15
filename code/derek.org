@@ -7,11 +7,11 @@
 
 import pickle
 def lower(email):
-	segmented_sents = pickle.load( open( "..\data\tokenized\tokenize.p", "rb"))
+	segmented_sents = pickle.load( open( "../data/tokenized/tokenize.p", "rb"))
 	
 	finalList = []
 	finalList = [(k,[x.lower() for x in v]) for (k,v) in segmented_sents]
-	pickle.dump(finalList, open("..\data\lower_case\lower.p", "wb")) 
+	pickle.dump(finalList, open("../data/lower_case/lower.p", "wb")) 
 
 
 #tested in jupyter notebook
@@ -22,8 +22,9 @@ def lower(email):
 #+BEGIN_EXAMPLE 
 
 lower takes a list of tuples as an input and used the .lower() function to make everything lowercase.  It outputs a list of tuples.
-
+[[file:../data/derek.org][Derek's Code]]
 #+END_EXAMPLE
+
 
 
 * TEST
