@@ -25,11 +25,48 @@ saved them in the appropriate formant. Kayla toeknized each sentence from
 each restringified email and saved in the appropriate format. Derek made
 all the emails lowercase. Finally, Pei removed the stop words of each
 email. We divided the work evenly between us, and Chris got some help from James.
+
 * Implementation :derek:
+[[file:../code/derek.org][Derek's Code]]
+I took in a list of tuples as inputs from the tokenized directory.  I iterated over the list with two for loops
+and lowered the second element in each list and placed them back in the same structure.
+I returned a list of tuples to segmented directory.
 
 * Results :pei:
 
 * Analysis and Future Work 					      :james:
+[[file:../code/james.org][james file]]
+
+#+begin_src python
+import pickle
+from itertools import chain
+from nltk import *
+
+Text(ham_list).collocations()
+
+corpus = pickle.load( open( "../data/remove_stopwords/stopwords_removed.p", "rb" ) )
+
+ham = [v for (k,v) in corpus if "ham" in k]
+spam = [v for (k,v) in corpus if "spam" in k]
+
+ham_list = list(chain.from_iterable(ham))
+spam_list = list(chain.from_iterable(spam))
+
+ham_dist = FreqDist(ham_list)
+spam_dist = FreqDist(spam_list)
+
+# 5000 most frequent words 
+ham_dist.most_common(5000)
+spam_dist.most_common(5000)
+
+# collocations
+ham_coll = Text(ham_list).collocations()
+spam_coll = Text(spam_list).collocations()
+
+# bigrams
+print(list(trigrams(ham_list)))
+print(list(trigrams(spam_list)))
+#+end_src
 
 Once the data were pre-processed, we combined the lists of ham and spam
 sentences into two lists of ham and spam respectively, where each
@@ -52,3 +89,5 @@ more elegant methods for creating spam. This creates a virtual "Red Queen"
 scenario. In other words, spam of the early 2000s will be less relevant
 than the spam of today given that both spam blockers and spammers have
 become more sophisticated.
+
+
