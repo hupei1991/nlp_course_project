@@ -33,7 +33,28 @@ and lowered the second element in each list and placed them back in the same str
 I returned a list of tuples to segmented directory.
 
 * Results :pei:
-
+[[file:../code/pei.org][Pei's File]]
+The main target for this project is to get the sequenced words list for
+each sentence, which is defined an identifier.
+The input would be included in these two corpus directory:
+[[file:../data/corpus/ham/][Ham Folder]], and [[file:../data/corpus/spam/][Spam Folder]].
+The output would be stored in [[file:../data/remove_stopwords/stopwords_removed.p][this python pickle file]].
+The sample output would be like:
+#+BEGIN_EXAMPLE
+('0001.1999-12-10.farmer.ham.txt::0000', ['Subject', ':', 'christmas', 'tree', 'farm', 'pictures'])
+('0001.1999-12-10.kaminski.ham.txt::0000', ['Subject', ':', ':', 'rankings', 'thank', '.'])
+('0002.1999-12-13.farmer.ham.txt::0000', ['Subject', ':', 'vastar', 'resources', ',', 'inc.', 'gary', ',', 'production', 'the', 'high', 'island', 'larger', 'block', '-', '1', '#', '2', 'commenced', 'saturday', '2', ':', '00', 'p.', 'm.', 'about', '6', ',', '500', 'gross', '.'])
+('0002.1999-12-13.farmer.ham.txt::0001', ['carlos', 'expects', '9', ',', '500', '10', ',', '000', 'gross', 'tomorrow', '.'])
+('0002.1999-12-13.farmer.ham.txt::0002', ['vastar', 'owns', '68', '%', 'the', 'gross', 'production', '.'])
+('0002.1999-12-13.farmer.ham.txt::0003', ['george', 'x', '3', '-', '6992', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', 'forwarded', 'george', 'weissman', '/', 'hou', '/', 'ect', '12', '/', '13', '/', '99', '10', ':', '16', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', 'daren', 'j', 'farmer', '12', '/', '10', '/', '99', '10', ':', '38', 'to', ':', 'carlos', 'j', 'rodriguez', '/', 'hou', '/', 'ect', '@', 'ect', 'cc', ':', 'george', 'weissman', '/', 'hou', '/', 'ect', '@', 'ect', ',', 'melissa', 'graves', '/', 'hou', '/', 'ect', '@', 'ect', 'subject', ':', 'vastar', 'resources', ',', 'inc.', 'carlos', ',', 'please', 'call', 'linda', 'get', 'everything', 'set', '.'])
+('0002.1999-12-13.farmer.ham.txt::0004', ["'", 'going', 'estimate', '4', ',', '500', 'coming', 'tomorrow', ',', 'a', '2', ',', '000', 'increase', 'following', 'day', 'based', 'my', 'conversations', 'bill', 'fischer', 'bmar', '.'])
+('0002.1999-12-13.farmer.ham.txt::0005', ['d.', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', 'forwarded', 'daren', 'j', 'farmer', '/', 'hou', '/', 'ect', '12', '/', '10', '/', '99', '10', ':', '34', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', 'enron', 'north', 'america', 'corp.', ':', 'george', 'weissman', '12', '/', '10', '/', '99', '10', ':', '00', 'to', ':', 'daren', 'j', 'farmer', '/', 'hou', '/', 'ect', '@', 'ect', 'cc', ':', 'gary', 'bryan', '/', 'hou', '/', 'ect', '@', 'ect', ',', 'melissa', 'graves', '/', 'hou', '/', 'ect', '@', 'ect', 'subject', ':', 'vastar', 'resources', ',', 'inc.', 'darren', ',', 'attached', 'appears', 'be', 'nomination', 'vastar', 'resources', ',', 'inc.', 'the', 'high', 'island', 'larger', 'block', '-', '1', '#', '2', '(', 'previously', ',', 'erroneously', 'referred', 'as', '#', '1', 'well', ')', '.'])
+('0002.1999-12-13.farmer.ham.txt::0006', ['vastar', 'expects', 'well', 'commence', 'production', 'sometime', 'tomorrow', '.'])
+('0002.1999-12-13.farmer.ham.txt::0007', ['told', 'linda', 'harris', 'we', "'", 'get', 'a', 'telephone', 'number', 'gas', 'control', 'she', 'provide', 'notification', 'the', 'turn', '-', 'tomorrow', '.'])
+#+END_EXAMPLE
+For the first item of each tuple, it's the index identity for sentences in the corpus.
+'::' is used to separate the email ID and the sentences' IDs within it. For the second item of each tuple,
+it's a list of words, where the stopwords are all removed. In this case, we can use those words to identify whether a piece of email is spam or ham.
 * Analysis and Future Work 					      :james:
 [[file:../code/james.org][james file]]
 
